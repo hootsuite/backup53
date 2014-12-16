@@ -58,6 +58,12 @@ aws_access_key_id = <AWS Access Key>
 aws_secret_access_key = <AWS Secret>
 ```
 #Usage
+tests:
+```
+cd tests/
+python tests.py
+```
+
 backup: 
 
 ```backup53 --action backup --location backup.json```
