@@ -1,0 +1,82 @@
+#!/bin/python
+# Copyright 2014 Steven Richards - Hootsuite Media -
+# <steven.richards@hootsuite.com>
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# 	http://www.apache.org/license/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+from backup53.iam import IAM
+from backup53.route53 import Route53
+from backup53.route53 import boto
+import argparse
+
+class Main():
+
+    def main():
+
+        opt = argparse.ArgumentParser(description='Route53 Backup Tool')
+        opt.add_argument(
+            '--location', help='Location of where to store/retrieve JSON records', required=True)
+        opt.add_argument('--action', help='backup or restore',
+                         required=True, type=str, choices=['backup', 'restore'])
+        opt.add_argument('--debug', help='print debug information',
+                         required=False, action='store_true', default=False)
+        args = vars(opt.parse_args())
+
+        r53 = Route53(args['location'], args['debug'])
+        iam = IAM()
+        try:
+            r53.enable_connection()  # Connects to AWS via Route53 endpoint
+            iam.enable_connection()  # Connects to AWS via IAM endpoint
+            # Returns account name or the text 'confirm' (only for validation
+            # purposes)
+            account_name = iam.get_account_info()
+        except boto.exception.BotoServerError:
+            exit(
+                '403 Forbidden - failed to connect to AWS IAM/Route53 endpoints, check your permissions')
+
+        if args['action'] == 'backup':
+            print 'Backing up'
+            confirm = raw_input(
+                'type the following to continue -  %s : ' % account_name)
+            if confirm != account_name:
+                quit(1)
+            r53.backup_zones()
+            if (r53.jsonize_data()):
+                print 'Backup Succeeded'
+                quit(0)
+            else:
+                print 'Backup Failed'
+                r53.clean_up()
+                quit(1)
+
+        elif args['action'] == 'restore':
+            print 'Restoring'
+            confirm = raw_input(
+                'type the following to continue -  %s : ' % account_name)
+            if confirm != account_name:
+                quit(1)
+            r53.dejsonize_data()
+            r53.restore_zone_structure()
+            if (r53.restore_zones()):
+                print 'Restore Succeeded'
+                quit(0)
+            else:
+                print 'Restore Failed'
+                quit(1)
+
+    def __quit__(status):
+        r53.clean_up()
+        exit(status)
+
+    if __name__ == '__main__':
+        main()
