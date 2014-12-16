@@ -38,9 +38,11 @@ u'hosted_zone.com.': {  'Data':[  {  'Name': '',
 ```
 #Configuration/Installation
 
-##Warning##
+###Warning###
 
 This tool has the potential to cause damage to your Route53 zones/records if used improperly (restoring a backup by accident, restoring to the wrong account, etc.), Use at your own risk.
+
+##Installation##
 
 ```sudo pip install -r requirements.txt```
 
@@ -49,7 +51,7 @@ This tool has the potential to cause damage to your Route53 zones/records if use
 
 Ensure you have Boto configured properly (either with environment variables or .boto config). Be certain you are using the right account to backup and restore to as it can be dangerous.
 
-.boto contents
+```.boto``` contents
 ```
 [Credentials]
 aws_access_key_id = <AWS Access Key>
