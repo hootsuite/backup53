@@ -37,7 +37,10 @@ u'hosted_zone.com.': {  'Data':[  {  'Name': '',
                                            u'ResourceRecordSetCount': u'3'}}
 ```
 #Configuration/Installation
+
 ```sudo pip install -r requirements.txt```
+```sudo python setup.py install```
+
 
 Ensure you have Boto configured properly (either with environment variables or .boto config). Be certain you are using the right account to backup and restore to as it can be dangerous.
 
@@ -48,9 +51,6 @@ aws_access_key_id = <AWS Access Key>
 aws_secret_access_key = <AWS Secret>
 ```
 #Usage
-install:
-```sudo python setup.py install```
-
 backup: 
 
 ```backup53 --action backup --location backup.json```
