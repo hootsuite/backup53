@@ -38,7 +38,12 @@ u'hosted_zone.com.': {  'Data':[  {  'Name': '',
 ```
 #Configuration/Installation
 
+##Warning##
+
+This tool has the potential to cause damage to your Route53 zones/records if used improperly (restoring a backup by accident, restoring to the wrong account, etc.), Use at your own risk.
+
 ```sudo pip install -r requirements.txt```
+
 ```sudo python setup.py install```
 
 
