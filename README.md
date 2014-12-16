@@ -3,7 +3,7 @@ backup53
 
 #Purpose 
 
-DNS is just sort of important, it's the glue that resolves names to addresses. Ensuring the integrity of it and the ability to backup and restore it is critical for organizations that do not have a secondary provider. Since Amazon does not provide a tool to backup and restore your hosted zones this tool allows you to backup and dynamically restore them; persisting nameserver glue records between zones. It is still early in testing and a recovery from a total DNS record/zone loss still requres a few manual steps (pointing root level domain registrar records at new nameservers, etc.) but it is a step in the right direction.
+DNS is just sort of important as it's the glue that resolves names to IP addresses. Ensuring the integrity of DNS and the ability to backup and restore it is critical for organizations that do not have a secondary DNS provider. Since Amazon does not provide a tool to backup and restore your hosted zones this tool allows you to backup and dynamically restore them; persisting nameserver glue records between zones. It is still early in testing and a recovery from a total DNS record/zone loss still requres a few manual steps (pointing root level domain registrar records at new nameservers, etc.) but it is a step in the right direction.
 
 #Features
 
