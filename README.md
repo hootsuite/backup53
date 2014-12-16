@@ -44,8 +44,6 @@ This tool has the potential to cause damage to your Route53 zones/records if use
 
 ##Installation##
 
-```sudo pip install -r requirements.txt```
-
 ```sudo python setup.py install```
 
 
