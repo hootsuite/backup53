@@ -7,6 +7,14 @@ DNS is just sort of important as it's the glue that resolves names to IP address
 
 #Features
 
+Upcoming:
+
+* JSON file per zone
+* Upsert ability instead of Create
+* Diff Zones (view what has changed)
+
+Current
+
 * Backs up Amazon Route53 DNS Zones/Records to JSON
 * Restore Zones/Records safely by creating new zones and recreating the glue between sub-domains and parent domains
 * Stores all DNS Zones/Records in the following JSON format:
