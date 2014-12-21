@@ -12,6 +12,7 @@ Upcoming:
 * JSON file per zone
 * Upsert ability instead of Create
 * Diff Zones (view what has changed)
+* Modify JSON and apply DNS changes to infrastructure (DNS management)
 
 Current
 
